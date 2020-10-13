@@ -32,31 +32,12 @@ function showSolutionsMessage(a,b,c) {
 }
 
 function getAverageScore(data) {
-    let averageScore = {};
-    averageScore.average = [];
-    if (data === 0) {
-        averageScore.average.push(0);
-        return averageScore;
+    let averageScore = data;
+    for (let prop in data) {
+        let value = data[prop];
+        averageScore[prop] = getAverageMark(value);
     }
-    averageScore.algebra = getAverageMark(data.algebra);
-    averageScore.average.push(getAverageMark(data.algebra));
-    averageScore.geometry = getAverageMark(data.geometry);
-    averageScore.average.push(getAverageMark(data.geometry));
-    averageScore.russian = getAverageMark(data.russian);
-    averageScore.average.push(getAverageMark(data.russian));
-    averageScore.physics = getAverageMark(data.physics);
-    averageScore.average.push(getAverageMark(data.physics));
-    averageScore.music = getAverageMark(data.music);
-    averageScore.average.push(getAverageMark(data.music));
-    averageScore.english = getAverageMark(data.english);
-    averageScore.average.push(getAverageMark(data.english));
-    averageScore.poetry = getAverageMark(data.poetry);
-    averageScore.average.push(getAverageMark(data.poetry));
-    averageScore.chemistry = getAverageMark(data.chemistry);
-    averageScore.average.push(getAverageMark(data.chemistry));
-    averageScore.french = getAverageMark(data.french);
-    averageScore.average.push(getAverageMark(data.french));
-    averageScore.average = getAverageMark(averageScore.average);
+    averageScore.average = getAverageMark(Object.values(averageScore));
 
     return averageScore;
 }
