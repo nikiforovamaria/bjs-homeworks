@@ -1,18 +1,18 @@
 String.prototype.isPalindrome = function() {
     let str = this.toLowerCase();
     str = str.split(' ').join('');
-    return str === str.split("").reverse().join("") ? true : false;
+    return str === str.split("").reverse().join("");
 }
 
 function getAverageMark(marks) {
     let average = 0;
-    if (marks === 0) {
+    if (marks.length === 0) {
         return average;
     }
     for (let i = 0; i < marks.length; i++) {
         average += marks[i]; 
     }
-    let roundedAverage = Math.round(average / marks.length);
+    const roundedAverage = Math.round(average / marks.length);
 
     return roundedAverage;
 }
