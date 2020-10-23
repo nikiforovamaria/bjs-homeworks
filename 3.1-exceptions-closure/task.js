@@ -19,34 +19,27 @@ class Triangle {
         this.a = a;
         this.b = b;
         this.c = c;
-        try {
-            if ((this.a + this.b < this.c) || (this.b + this.c < this.a) || (this.c + this.a < this.b)) {
+        if ((this.a + this.b < this.c) || (this.b + this.c < this.a) || (this.c + this.a < this.b)) {
             throw new Error('Треугольник с такими сторонами не существует');
-            }
-        } catch(e) {
-            return e;
         }
     }
     getPerimeter() {
-        const P = this.a + this.b + this.c;
-        return P;
+        return this.a + this.b + this.c;
     }
     getArea() {
         const p = this.getPerimeter() / 2;
-        const S = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-        return parseFloat(S.toFixed(3));
+        const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+        return parseFloat(s.toFixed(3));
     }
 }
 
 function getTriangle(a, b, c) {
-    const tri = new Triangle(a, b, c);
     try {
-        return tri;
+        return new Triangle(a, b, c);
     } catch {
-        tri = {
+        return {
             getPerimeter: () => 'Ошибка! Треугольник не существует',
             getArea: () => 'Ошибка! Треугольник не существует'
-        }
-        return tri;
+        };
     }
 }
