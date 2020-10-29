@@ -28,12 +28,12 @@ function memorize(fn, limit = 10) {
     if (inMemory) {
       return inMemory.result;
     } else {
-      const fn1 = () => fn(...args);
-      memory.push({args: args, result: fn1()});
+      const fn1 = fn(...args);
+      memory.push({args: args, result: fn1});
       if (memory.length > limit) {
         memory.shift();
       }
-      return fn1();
+      return fn1;
     }
   }
 }
