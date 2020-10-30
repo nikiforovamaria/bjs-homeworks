@@ -27,14 +27,13 @@ function memorize(fn, limit = 10) {
     const inMemory = memory.find(item => compareArrays(args, item.args));
     if (inMemory) {
       return inMemory.result;
-    } else {
-      const fn1 = fn(...args);
-      memory.push({args: args, result: fn1});
-      if (memory.length > limit) {
-        memory.shift();
-      }
-      return fn1;
     }
+    const result = fn(...args);
+    memory.push({args: args, result: result});
+    if (memory.length > limit) {
+      memory.shift();
+    }
+    return result;
   }
 }
 
@@ -56,6 +55,12 @@ console.log(testCase(sum, 'sum'));
 //sum: 5049.229248046875 ms
 console.log(testCase(mSum, 'mSum'));
 //mSum: 605.64501953125 ms
+
+//Без задержки
+//console.log(testCase(sum, 'sum'));
+//sum: 0.135986328125 ms
+//console.log(testCase(mSum, 'mSum'));
+//mSum: 0.339111328125 ms
 
 //альтернативный вариант решения
 
@@ -90,15 +95,16 @@ function memorize(fn, limit = 10) {
       result: 4
     }
   ];
-  if (memory.length > limit) {
+  return function(...args) {
+    const inMemory = memory.find(item => compareArrays(args, item.args))) 
+    if (inMemory) {
+    return console.log(`результат из памяти ${inMemory.result}`);
+    } 
+    const result = fn(...args);
+    memory.push({args: args, result: result});
+    if (memory.length > limit) {
     memory.shift();
-  }
-  if (memory.some(compareArrays(fn(...args), memory.args))) {
-    return console.log(`результат из памяти ${memory.result}`);
-  } else {
-    const fn1 = () => fn;
-    memory.push({args: [fn(...args)], result: fn1()});
-    return console.log(`результат не из памяти ${fn1()}`);
+    return console.log(`результат не из памяти ${result}`);
   }
 }
 
